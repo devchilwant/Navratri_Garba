@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Garba Entry Verification</title>
+  <meta name="theme-color" content="#7c3aed" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <main class="app">
+    <header class="topbar">
+      <div>
+        <div class="eyebrow">NAVRATRI • GARBA ENTRY</div>
+        <h1>Entry Verification</h1>
+        <p id="todayLabel" class="muted"></p>
+      </div>
+      <button id="refreshBtn" class="secondary">Refresh</button>
+    </header>
+
+    <section class="card">
+      <label for="flatInput">Flat Number</label>
+      <div class="search-row">
+        <input id="flatInput" autocomplete="off" inputmode="text" placeholder="e.g. A-1204" />
+        <button id="verifyBtn">Verify</button>
+      </div>
+      <p class="hint">Only flats marked as having paid the Cultural Fund can be approved.</p>
+    </section>
+
+    <section id="resultCard" class="card hidden"></section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>Today's Entry Summary</h2>
+        <span id="lastUpdated" class="muted"></span>
+      </div>
+      <div id="summary" class="summary-grid">
+        <div class="metric"><span>Total Flats</span><strong id="totalFlats">—</strong></div>
+        <div class="metric"><span>Paid Flats</span><strong id="paidFlats">—</strong></div>
+        <div class="metric"><span>Entries Today</span><strong id="entriesToday">—</strong></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <div class="section-title">
+        <h2>Quick Flat Status</h2>
+        <input id="filterInput" class="small-input" placeholder="Search flat" />
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Flat</th>
+              <th>Allowed</th>
+              <th>Approved</th>
+              <th>Remaining</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="flatTable"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>
+      <p>Source: Google Sheet (read-only) • Daily entry records: Firebase Firestore</p>
+    </footer>
+  </main>
+
+  <div id="toast" class="toast"></div>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // This app intentionally has a public read/write client for a society event.
+    // The transaction in app.js prevents the same flat from exceeding its allowed
+    // count even when multiple devices approve at the same time.
+    //
+    // For stronger security, add Firebase Authentication and restrict writes
+    // to authenticated staff/admin users.
+    match /entryDays/{docId} {
+      allow read, create, update: if
+        request.resource.data.date is string &&
+        request.resource.data.flat is string &&
+        request.resource.data.approved is int &&
+        request.resource.data.approved >= 0 &&
+        request.resource.data.approved <= 100;
+      allow delete: if false;
+    }
+  }
+}
